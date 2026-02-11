@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Malade - ÉpiCare</title>
+
+    <!-- Fonts: Inter & Tajawal (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons: Material Icons Round -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#427cf0', // Medical Blue
+                            soft: '#e0eafc',    // Soft Sky Blue
+                        },
+                        secondary: {
+                            soft: '#eafaf1',    // Healing Mint
+                        },
+                        background: {
+                            light: '#f6f6f8',   // Clinical Off-White
+                            dark: '#101622',    // Deep Navy/Charcoal
+                        },
+                        slate: {
+                            600: '#475569',     // Body text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                        '3xl': '1.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glossy {
+            backdrop-filter: blur(8px);
+            background-color: rgba(66, 124, 240, 0.1);
+        }
+
+        .nav-item-active {
+            color: #427cf0;
+            background-color: rgba(66, 124, 240, 0.1);
+        }
+
+        /* Dropdown Group Hover Logic */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-slate-800 antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-primary/10 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="final.html" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <span class="material-icons-round text-2xl">medical_services</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-extrabold text-slate-900 leading-none">ÉpiCare</span>
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider"
+                        data-i18n="nav.patient">Espace Malade</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-4">
+
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+                        <span class="material-icons-round text-slate-500">language</span>
+                        <span class="font-medium text-slate-600" data-i18n="nav.language">Langue</span>
+                        <span class="material-icons-round text-slate-400 text-sm">expand_more</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <button onclick="changeLanguage('tn')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Tunisian</button>
+                            <button onclick="changeLanguage('fr')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Français</button>
+                            <button onclick="changeLanguage('en')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espace Malade (Active) -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-primary font-bold bg-primary/10 transition-colors">
+                        <span class="material-icons-round">person_outline</span>
+                        <span data-i18n="nav.patient">Espace Malade</span>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <!-- Mega Menu / Dropdown -->
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="#traitement"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medication</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.treatments">Traitements</span>
+                        </a>
+                        <a href="#crises"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">videocam</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.crises">Types de
+                                Crises</span>
+                        </a>
+                        <a href="#diagnostic"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">monitor_heart</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.diagnosis">Diagnostic</span>
+                        </a>
+                        <a href="#daily-life"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">wb_sunny</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.daily">Vivre au
+                                Quotidien</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Parents -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+                        <a href="parents.html" class="flex items-center gap-2">
+                            <span class="material-icons-round">favorite_border</span>
+                            <span data-i18n="nav.parents">Parents & Aidants</span>
+                        </a>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="parents.html#scolarity"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">school</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.scolarity">Scolarité</span>
+                        </a>
+                        <a href="parents.html#support"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">psychology</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.support">Soutien</span>
+                        </a>
+                        <a href="parents.html#rescue"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-red-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-red-100 text-red-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medical_services</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.rescue">Actes de
+                                Secours</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Actualités Scientifiques -->
+                <a href="science.html"
+                    class="px-3 py-2 rounded-xl font-medium text-slate-600 hover:text-primary transition-colors hover:bg-slate-50 flex items-center gap-2">
+                    <span class="material-icons-round">science</span>
+                    <span data-i18n="nav.science">Actu Science</span>
+                </a>
+
+                <!-- Avis -->
+                <a href="feedback.html"
+                    class="px-4 py-2 rounded-xl font-bold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all flex items-center gap-2">
+                    <span class="material-icons-round">rate_review</span>
+                    <span data-i18n="nav.feedback">Donner Avis</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger (Placeholder) -->
+            <button class="md:hidden p-2 text-slate-600">
+                <span class="material-icons-round text-3xl">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-16 pb-24 bg-gradient-to-br from-primary-soft/30 to-white overflow-hidden">
+        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+            <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm mb-6"
+                data-i18n="nav.patient">Espace Malade</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Comprendre et <span class="text-primary">Vivre Mieux</span>
+            </h1>
+            <p class="text-xl text-slate-600 leading-relaxed mb-10">
+                Un guide complet pour vous accompagner : de la compréhension de votre traitement à la gestion du
+                quotidien.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 space-y-24">
+
+        <!-- 1. Traitements -->
+        <section id="traitement" class="scroll-mt-24">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-2 h-10 bg-primary rounded-full"></div>
+                <h2 class="text-3xl font-bold text-slate-900" data-i18n="nav.sub.treatments">Les Traitements Médicaux
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6">
+                        <span class="material-icons-round text-3xl">medication</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Médicaments</h3>
+                    <p class="text-slate-600 leading-relaxed">Les antiépileptiques sont la base du traitement. Ils
+                        visent à stabiliser l'activité électrique du cerveau.</p>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="material-icons-round text-3xl">alarm_on</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Régularité</h3>
+                    <p class="text-slate-600 leading-relaxed">La prise régulière à heures fixes est cruciale pour
+                        maintenir l'efficacité du traitement.</p>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div
+                        class="w-14 h-14 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="material-icons-round text-3xl">healing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Effets Secondaires</h3>
+                    <p class="text-slate-600 leading-relaxed">Fatigue ou vertiges peuvent survenir. Parlez-en toujours à
+                        votre médecin avant de modifier quoi que ce soit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Types de Crises (Videos) -->
+        <section id="crises" class="scroll-mt-24 bg-slate-50 rounded-[3rem] p-8 md:p-16">
+            <div class="text-center mb-12">
+                <span class="text-primary font-bold uppercase tracking-widest text-sm">Vidéothèque</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2" data-i18n="nav.sub.crises">Reconnaître
+                    les Crises</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                    <iframe class="w-full h-48" src="https://www.youtube.com/embed/XZtHqADTbkk" title="Crises"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-900 mb-1">Crises Généralisées</h3>
+                        <p class="text-sm text-slate-500">Explication détaillée.</p>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                    <iframe class="w-full h-48" src="https://www.youtube.com/embed/hAD91PgB73g" title="Crises"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-900 mb-1">Crises Focales</h3>
+                        <p class="text-sm text-slate-500">Explication détaillée.</p>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                    <iframe class="w-full h-48" src="https://www.youtube.com/embed/hnrmJ0u8u4s" title="Crises"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-900 mb-1">Classification</h3>
+                        <p class="text-sm text-slate-500">Comprendre les types.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Diagnostic -->
+        <section id="diagnostic" class="scroll-mt-24">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="w-2 h-10 bg-secondary-soft rounded-full"></div>
+                <h2 class="text-3xl font-bold text-slate-900" data-i18n="nav.sub.diagnosis">Le Parcours Diagnostic</h2>
+            </div>
+            <div class="relative">
+                <!-- Line -->
+                <div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-slate-100 z-0"></div>
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg">
+                            1</div>
+                        <h3 class="text-xl font-bold mb-2">EEG</h3>
+                        <p class="text-sm text-slate-500">Enregistrement de l'activité électrique.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-secondary-soft text-emerald-600 rounded-full flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg">
+                            2</div>
+                        <h3 class="text-xl font-bold mb-2">IRM Cérébrale</h3>
+                        <p class="text-sm text-slate-500">Visualisation de la structure du cerveau.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center">
+                        <div
+                            class="w-20 h-20 mx-auto bg-slate-800 text-white rounded-full flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg">
+                            3</div>
+                        <h3 class="text-xl font-bold mb-2">Consultation</h3>
+                        <p class="text-sm text-slate-500">Synthèse et mise en place du traitement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Vie Quotidienne -->
+        <section id="daily-life" class="scroll-mt-24 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-emerald-500 font-bold uppercase tracking-wider text-sm mb-2 block">Conseils
+                    Pratiques</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-6" data-i18n="nav.sub.daily">Vivre au Quotidien</h2>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                    L'épilepsie ne doit pas vous empêcher de vivre. Avec quelques ajustements, la plupart des activités
+                    restent possibles (sport, travail, loisirs).
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                        <span class="material-icons-round text-blue-500">bedtime</span>
+                        <span class="font-medium">Sommeil régulier indispensable</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                        <span class="material-icons-round text-orange-500">sports_soccer</span>
+                        <span class="font-medium">Sport encouragé (avec précautions)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                        <span class="material-icons-round text-purple-500">work</span>
+                        <span class="font-medium">Aménagement du poste de travail possible</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-br from-primary-soft to-secondary-soft rounded-[3rem] p-8 h-full min-h-[400px] flex items-center justify-center">
+                <blockquote class="text-center">
+                    <p class="text-2xl font-medium text-slate-800 italic mb-6">"Le plus important est de trouver son
+                        propre équilibre entre prudence et liberté."</p>
+                    <cite class="text-primary font-bold not-italic">- Association ÉpiCare</cite>
+                </blockquote>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-soft pt-16 pb-8 border-t border-primary/10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-lg font-semibold text-slate-500 mb-8 uppercase tracking-widest"
+                    data-i18n="footer.partners">En partenariat avec</p>
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                    <span class="font-bold text-slate-600 text-lg">MTC Club</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Associamed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ATDE</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Association Ahmed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ARNNE</span>
+                </div>
+            </div>
+            <div
+                class="border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p data-i18n="footer.rights">© 2026 ÉpiCare. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Script -->
+    <script src="translation.js"></script>
+
+</body>
+
+</html>

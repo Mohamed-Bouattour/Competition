@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités Scientifiques - ÉpiCare</title>
+
+    <!-- Fonts: Inter & Tajawal (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons: Material Icons Round -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#427cf0', // Medical Blue
+                            soft: '#e0eafc',    // Soft Sky Blue
+                        },
+                        secondary: {
+                            soft: '#eafaf1',    // Healing Mint
+                        },
+                        background: {
+                            light: '#f6f6f8',   // Clinical Off-White
+                            dark: '#101622',    // Deep Navy/Charcoal
+                        },
+                        slate: {
+                            600: '#475569',     // Body text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                        '3xl': '1.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Dropdown Group Hover Logic */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-slate-800 antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-primary/10 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="final.html" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <span class="material-icons-round text-2xl">medical_services</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-extrabold text-slate-900 leading-none">ÉpiCare</span>
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider"
+                        data-i18n="nav.science">Actu Science</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-4">
+
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+                        <span class="material-icons-round text-slate-500">language</span>
+                        <span class="font-medium text-slate-600" data-i18n="nav.language">Langue</span>
+                        <span class="material-icons-round text-slate-400 text-sm">expand_more</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <button onclick="changeLanguage('tn')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Tunisian</button>
+                            <button onclick="changeLanguage('fr')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Français</button>
+                            <button onclick="changeLanguage('en')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espace Malade -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+                        <span class="material-icons-round">person_outline</span>
+                        <span data-i18n="nav.patient">Espace Malade</span>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="patient.html#traitement"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medication</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.treatments">Traitements</span>
+                        </a>
+                        <a href="patient.html#crises"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">videocam</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.crises">Types de
+                                Crises</span>
+                        </a>
+                        <a href="patient.html#diagnostic"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">monitor_heart</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.diagnosis">Diagnostic</span>
+                        </a>
+                        <a href="patient.html#daily-life"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">wb_sunny</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.daily">Vivre au
+                                Quotidien</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Parents & Aidants -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+                        <span class="material-icons-round">favorite_border</span>
+                        <span data-i18n="nav.parents">Parents & Aidants</span>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="parents.html#scolarity"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">school</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.scolarity">Scolarité</span>
+                        </a>
+                        <a href="parents.html#support"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">psychology</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.support">Soutien</span>
+                        </a>
+                        <a href="parents.html#rescue"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-red-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-red-100 text-red-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medical_services</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.rescue">Actes de
+                                Secours</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Actualités Scientifiques (Active) -->
+                <a href="science.html"
+                    class="px-3 py-2 rounded-xl font-bold text-primary bg-primary/10 transition-colors hover:bg-primary/20 flex items-center gap-2">
+                    <span class="material-icons-round">science</span>
+                    <span data-i18n="nav.science">Actu Science</span>
+                </a>
+
+                <!-- Avis -->
+                <a href="feedback.html"
+                    class="px-4 py-2 rounded-xl font-bold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all flex items-center gap-2">
+                    <span class="material-icons-round">rate_review</span>
+                    <span data-i18n="nav.feedback">Donner Avis</span>
+                </a>
+
+            </div>
+            <!-- Mobile Hamburger (Placeholder) -->
+            <button class="md:hidden p-2 text-slate-600">
+                <span class="material-icons-round text-3xl">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-br from-primary-soft to-white py-16 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 rounded-l-full"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <span
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-primary font-bold text-sm mb-6 shadow-sm border border-primary/20">
+                <span class="material-icons-round text-base">science</span>
+                <span data-i18n="science.tag">Recherche & Innovation</span>
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
+                <span data-i18n="science.title">Actualités Scientifiques</span>
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto" data-i18n="science.desc">
+                Les dernières avancées de la recherche médicale sur l'épilepsie et les nouvelles technologies de
+                détection et de traitement.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+
+        <!-- Scientific News Section -->
+        <section id="news" class="scroll-mt-24">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="w-2 h-10 bg-blue-600 rounded-full"></div>
+                <h2 class="text-3xl font-bold text-slate-900" data-i18n="science.section.title">Dernières Publications
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article
+                    class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="material-icons-round text-blue-600 text-lg">biotech</span>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wide"
+                            data-i18n="science.cat.research">Recherche</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="science.art1.title">Nouvelles
+                        molécules en 2026</h3>
+                    <p class="text-slate-600 text-sm mb-4" data-i18n="science.art1.text">Les dernières avancées sur les
+                        traitements ciblés pour les épilepsies pharmaco-résistantes.</p>
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/?term=epilepsy+treatment+2025" target="_blank"
+                        class="text-primary font-medium hover:underline flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <span data-i18n="science.read.pubmed">Lire sur PubMed</span> <span
+                            class="material-icons-round text-sm">open_in_new</span>
+                    </a>
+                </article>
+                <!-- Article 2 -->
+                <article
+                    class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="material-icons-round text-emerald-600 text-lg">memory</span>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide"
+                            data-i18n="science.cat.tech">Technologie</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="science.art2.title">Détection par IA
+                    </h3>
+                    <p class="text-slate-600 text-sm mb-4" data-i18n="science.art2.text">Comment l'intelligence
+                        artificielle aide à prédire les crises avec plus de précision.</p>
+                    <a href="https://scholar.google.com/scholar?q=epilepsy+ai+prediction+2025" target="_blank"
+                        class="text-primary font-medium hover:underline flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <span data-i18n="science.read.scholar">Lire sur Google Scholar</span> <span
+                            class="material-icons-round text-sm">open_in_new</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-soft pt-16 pb-8 border-t border-primary/10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-lg font-semibold text-slate-500 mb-8 uppercase tracking-widest"
+                    data-i18n="footer.partners">En partenariat avec</p>
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                    <span class="font-bold text-slate-600 text-lg">MTC Club</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Associamed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ATDE</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Association Ahmed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ARNNE</span>
+                </div>
+            </div>
+            <div
+                class="border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p data-i18n="footer.rights">© 2026 ÉpiCare. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Script -->
+    <script src="translation.js"></script>
+</body>
+
+</html>

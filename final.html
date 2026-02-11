@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉpiCare - Sensibilisation & Soutien</title>
+
+    <!-- Fonts: Inter & Tajawal (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons: Material Icons Round -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#427cf0', // Medical Blue
+                            soft: '#e0eafc',    // Soft Sky Blue
+                        },
+                        secondary: {
+                            soft: '#eafaf1',    // Healing Mint
+                        },
+                        background: {
+                            light: '#f6f6f8',   // Clinical Off-White
+                            dark: '#101622',    // Deep Navy/Charcoal
+                        },
+                        slate: {
+                            600: '#475569',     // Body text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                        '3xl': '1.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glossy {
+            backdrop-filter: blur(8px);
+            background-color: rgba(66, 124, 240, 0.1);
+        }
+
+        /* Dropdown Group Hover Logic */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-slate-800 antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-primary/10 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="final.html" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <span class="material-icons-round text-2xl">medical_services</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-extrabold text-slate-900 leading-none">ÉpiCare</span>
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider"
+                        data-i18n="nav.home">Accueil</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-4">
+
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+                        <span class="material-icons-round text-slate-500">language</span>
+                        <span class="font-medium text-slate-600" data-i18n="nav.language">Langue</span>
+                        <span class="material-icons-round text-slate-400 text-sm">expand_more</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <button onclick="changeLanguage('tn')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Tunisian</button>
+                            <button onclick="changeLanguage('fr')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">Français</button>
+                            <button onclick="changeLanguage('en')"
+                                class="block w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700">English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espace Malade -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+                        <span class="material-icons-round">person_outline</span>
+                        <span data-i18n="nav.patient">Espace Malade</span>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="patient.html#traitement"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medication</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.treatments">Traitements</span>
+                        </a>
+                        <a href="patient.html#crises"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">videocam</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.crises">Types de
+                                Crises</span>
+                        </a>
+                        <a href="patient.html#diagnostic"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">monitor_heart</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.diagnosis">Diagnostic</span>
+                        </a>
+                        <a href="patient.html#daily-life"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">wb_sunny</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.daily">Vivre au
+                                Quotidien</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Parents & Aidants -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors">
+                        <span class="material-icons-round">favorite_border</span>
+                        <span data-i18n="nav.parents">Parents & Aidants</span>
+                        <span class="material-icons-round text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full -left-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2">
+                        <a href="parents.html#scolarity"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">school</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700"
+                                data-i18n="nav.sub.scolarity">Scolarité</span>
+                        </a>
+                        <a href="parents.html#support"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">psychology</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.support">Soutien</span>
+                        </a>
+                        <a href="parents.html#rescue"
+                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-red-50 transition-colors">
+                            <div class="w-8 h-8 rounded-lg bg-red-100 text-red-500 flex items-center justify-center">
+                                <span class="material-icons-round text-sm">medical_services</span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700" data-i18n="nav.sub.rescue">Actes de
+                                Secours</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Actualités Scientifiques -->
+                <a href="science.html"
+                    class="px-3 py-2 rounded-xl font-medium text-slate-600 hover:text-primary transition-colors hover:bg-slate-50 flex items-center gap-2">
+                    <span class="material-icons-round">science</span>
+                    <span data-i18n="nav.science">Actu Science</span>
+                </a>
+
+                <!-- Avis -->
+                <a href="feedback.html"
+                    class="px-4 py-2 rounded-xl font-bold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-all flex items-center gap-2">
+                    <span class="material-icons-round">rate_review</span>
+                    <span data-i18n="nav.feedback">Donner Avis</span>
+                </a>
+
+            </div>
+            <!-- Mobile Hamburger (Placeholder) -->
+            <button class="md:hidden p-2 text-slate-600">
+                <span class="material-icons-round text-3xl">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-32 overflow-hidden">
+        <!-- Abstract Background Elements -->
+        <div
+            class="absolute top-0 right-0 w-2/3 h-full bg-primary-soft rounded-l-[5rem] opacity-40 -z-10 translate-x-1/4">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-1/3 h-2/3 bg-secondary-soft rounded-r-full opacity-60 -z-10 -translate-x-1/4 translate-y-1/4">
+        </div>
+
+        <div class="container mx-auto px-6 text-center max-w-5xl relative z-10">
+            <!-- Tag -->
+            <span
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glossy text-primary font-bold text-sm mb-8 border border-primary/20 animate-fade-in-up">
+                <span class="material-icons-round text-base">info</span>
+                <span data-i18n="hero.tag">Sensibilisation & Information</span>
+            </span>
+
+            <!-- Main Heading -->
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight mb-8 tracking-tight">
+                <span data-i18n="hero.title">Comprendre l'Épilepsie,</span><br>
+                <span class="text-primary relative inline-block">
+                    <span data-i18n="hero.subtitle">Soutenir la Vie</span>
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-secondary-soft -z-10" viewBox="0 0 100 10"
+                        preserveAspectRatio="none">
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                    </svg>
+                </span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium mb-12"
+                data-i18n="hero.desc">
+                Une plateforme accessible dédiée à l'information claire et apaisée pour les patients et leurs familles.
+            </p>
+
+            <!-- CTA -->
+            <a href="#definition"
+                class="inline-flex items-center gap-3 bg-primary hover:bg-blue-600 text-white text-lg font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <span data-i18n="hero.cta">Commencer la Lecture</span>
+                <span class="material-icons-round">arrow_downward</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Introductory Videos Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                    <iframe class="w-full h-64 md:h-80" src="https://www.youtube.com/embed/f1-GzT6wSWw"
+                        title="Epilepsy Intro" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="p-4 bg-slate-50">
+                        <h3 class="font-bold text-lg text-slate-900">Introduction à l'Épilepsie</h3>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                    <iframe class="w-full h-64 md:h-80" src="https://www.youtube.com/embed/taYxF9lzFcw" title="Causes"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="p-4 bg-slate-50">
+                        <h3 class="font-bold text-lg text-slate-900">Les Causes Expliquées</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <main id="definition" class="py-24 bg-white relative">
+        <div class="container mx-auto px-6">
+
+            <!-- Definition Highlight -->
+            <div class="max-w-4xl mx-auto mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="h-10 w-2 bg-secondary-soft rounded-full"></div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800" data-i18n="section.def.title">Qu'est-ce
+                        que l'Épilepsie ?</h2>
+                </div>
+
+                <div
+                    class="bg-secondary-soft p-10 rounded-3xl border border-emerald-100 flex gap-6 items-start relative overflow-hidden group">
+                    <span
+                        class="material-icons-round text-9xl absolute -right-8 -bottom-8 text-emerald-200/50 group-hover:scale-110 transition-transform duration-500">psychology</span>
+                    <div class="relative z-10">
+                        <p class="text-2xl leading-relaxed font-medium text-slate-700" data-i18n="section.def.text">
+                            L'épilepsie est une affection neurologique chronique. Elle se caractérise par la répétition
+                            spontanée de décharges électriques excessives dans le cerveau, que l'on appelle des <span
+                                class="text-emerald-700 font-bold">crises</span>. C'est une condition médicale fréquente
+                            qui se soigne et se stabilise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difference Crise vs Maladie -->
+            <div class="max-w-4xl mx-auto mb-24">
+                <div class="bg-indigo-50 p-10 rounded-3xl border border-indigo-100">
+                    <h3 class="text-2xl font-bold text-indigo-900 mb-6 flex items-center gap-3">
+                        <span class="material-icons-round">compare_arrows</span>
+                        <span data-i18n="section.diff.title">Crise vs Maladie</span>
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm">
+                            <p class="text-lg text-slate-700" data-i18n="section.diff.p1">Une <strong>Crise
+                                    Épileptique</strong> est un événement ponctuel, un 'orage électrique' passager dans
+                                le cerveau.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm">
+                            <p class="text-lg text-slate-700" data-i18n="section.diff.p2">La <strong>Maladie
+                                    Épileptique</strong> est la prédisposition chronique à faire ces crises de manière
+                                répétée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Causes Grid -->
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n="section.causes.title">
+                        Causes Probables</h2>
+                    <div class="w-24 h-1 bg-primary rounded-full mx-auto"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div
+                        class="p-8 bg-background-light rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-icons-round text-4xl">dna</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3" data-i18n="card.genetics.title">Facteurs
+                            Génétiques</h3>
+                        <p class="text-lg text-slate-600 leading-relaxed" data-i18n="card.genetics.text">
+                            Certaines formes d'épilepsie sont liées à une prédisposition héréditaire transmise au sein
+                            de la famille.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="p-8 bg-background-light rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-icons-round text-4xl">healing</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3" data-i18n="card.lesions.title">Lésions
+                            Cérébrales</h3>
+                        <p class="text-lg text-slate-600 leading-relaxed" data-i18n="card.lesions.text">
+                            Des traumatismes crâniens, des accidents vasculaires ou des infections peuvent laisser des
+                            cicatrices dans le cerveau.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="p-8 bg-background-light rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-icons-round text-4xl">child_care</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3" data-i18n="card.dev.title">Développement</h3>
+                        <p class="text-lg text-slate-600 leading-relaxed" data-i18n="card.dev.text">
+                            Anomalies survenant pendant la grossesse ou la naissance qui affectent la structure du
+                            cerveau.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div
+                        class="p-8 bg-background-light rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="material-icons-round text-4xl">help_outline</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3" data-i18n="card.unknown.title">Inconnues</h3>
+                        <p class="text-lg text-slate-600 leading-relaxed" data-i18n="card.unknown.text">
+                            Dans environ la moitié des cas, la cause précise de l'épilepsie ne peut pas être déterminée
+                            immédiatement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-soft pt-16 pb-8 border-t border-primary/10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-lg font-semibold text-slate-500 mb-8 uppercase tracking-widest"
+                    data-i18n="footer.partners">En partenariat avec</p>
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                    <span class="font-bold text-slate-600 text-lg">MTC Club</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Associamed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ATDE</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">Association Ahmed</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="font-bold text-slate-600 text-lg">ARNNE</span>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p data-i18n="footer.rights">© 2026 ÉpiCare. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Script -->
+    <script src="translation.js"></script>
+</body>
+
+</html>
